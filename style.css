@@ -40,7 +40,7 @@ body {
 
 /* All columns inside the form row will have spacing and a default size */
 .formRow > .column {
-  width: 50dvw;
+  width: 30dvw;
   padding: 1dvw;
   margin: 0;
 }
