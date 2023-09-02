@@ -17,6 +17,9 @@ function renderColumns() {
 
     columnNode.classList.add("trelloColumn");
 
+    // give columns some drag and drop event handling
+    columnNode.addEventListener("dragover", allowDrop);
+
     // Create content to render column data
     let columnHeading = document.createElement("h3");
     columnHeading.innerText = column.name;
@@ -38,6 +41,9 @@ function renderColumns() {
       // Same as above but for the paragraph tag
       newCard.querySelector(".cardDisplay-content").innerText = card.content;
 
+      // allow cards to be draggable
+      newCard.addEventListener("dragstart", drag);
+
       // After data is all done, attach card to column
       columnNode.appendChild(newCard);
     });
@@ -45,4 +51,17 @@ function renderColumns() {
     trelloDataRowRootNode.appendChild(columnNode);
   });
 }
+
+// when we drag a DOM element around,
+// tell the browser some data about what awe are dragging
+function drag(event) {
+  event.dataTransfer.setData("text", event.target.id);
+}
+
+// removing default browser behaviour for elements
+// that receive a drag and drop
+function allowDrop(event) {
+  event.preventDefault();
+}
+
 renderColumns();
