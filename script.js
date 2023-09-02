@@ -15,6 +15,9 @@ function renderColumns() {
 
     let columnNode = document.createElement("div");
 
+    // set the column id in the dom
+    columnNode.id = column.name;
+
     columnNode.classList.add("trelloColumn");
 
     // Give the columns some drag & drop event handling
@@ -88,6 +91,9 @@ function dropCard(event) {
   // Find the column data for the column that we just dragged
   // the card on to, and push that card into its data.
   trelloData.columns.forEach((column) => {
+    column.cards = column.cards.filter(
+      (card) => card.timestamp != oldCardData.timestamp
+    );
     if (column.name == event.target.id) {
       column.cards.push(oldCardData);
     } else {
